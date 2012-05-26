@@ -1,0 +1,22 @@
+CREATE TABLE versand (
+	vid INTEGER NOT NULL IDENTITY PRIMARY KEY,
+	name VARCHAR(30)
+);
+
+CREATE SEQUENCE VERSAND_SEQ_GEN AS INTEGER
+    START WITH 666 INCREMENT BY 1;
+
+CREATE TABLE versandteile (
+	vid INTEGER,
+	teil VARCHAR(30),
+	teilnr VARCHAR(2)
+);
+
+ALTER TABLE versandteile ADD 
+	CONSTRAINT versandteile_pk
+    PRIMARY KEY (vid,teil);
+
+ALTER TABLE versandteile
+    ADD CONSTRAINT versand_vid_fk 
+    FOREIGN KEY (vid)
+    REFERENCES versand(vid);
